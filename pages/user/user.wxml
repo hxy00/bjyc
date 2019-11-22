@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view> -->
+
+<!--pages/user-detail/user-detail.wxml-->
+<view class="personal_info">
+	<view class="photo_wrap">
+		<image src="{{userInfo.avatarUrl}}" class="photo"></image>
+	</view>
+	<view class="nickname">
+		{{userInfo.nickName}}
+	</view>
+</view>
+<view class="wode_item_wrap">
+	<!-- <view class="wode_item" wx:for="{{mode}}" bindtap="onItemClick">
+		{{item}}
+		<span class="arrow_wrap"></span>
+	</view> -->
+  <view class="wode_item" bindtap="onItemClick">
+		方位：贵阳 —> 石阡
+		<span class="arrow_wrap"></span>
+	</view>
+  <!-- <view class="wode_item" bindtap="collect">
+		收藏
+		<span class="arrow_wrap"></span>
+	</view> -->
+  <view class="wode_item" bindtap="mypublish">
+		我发布
+		<span class="arrow_wrap"></span>
+	</view>
+</view>

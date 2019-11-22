@@ -1,0 +1,35 @@
+<!--details.wxml-->
+<view>
+  <view>
+    <loading hidden="{{hidden}}">
+      {{loadingText}}
+    </loading>
+
+    <toast hidden="{{toastHidden}}" bindchange="onToastChanged">
+      {{toastText}}
+    </toast>
+
+    <view class="content">
+      <view class="title">
+        {{title}}
+      </view>
+      <view bindlongtap="onlongclick">
+        <image class="bigImage" mode="aspectFill" src="{{url}}" />
+      </view>
+      <view>
+        {{desc}}
+      </view>
+      <view>
+        {{who}}
+      </view>
+      <view>
+        {{time}}
+      </view>
+    </view>
+
+
+    <modal title="是否保存？" confirm-text="保存" cancel-text="取消" data-url="{{url}}" hidden="{{modalHidden}}" bindconfirm="onSaveClick" bindcancel="onCancelClick">
+    </modal>
+
+  </view>
+</view>

@@ -1,0 +1,73 @@
+/* *index.wxss*
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+} */
+
+
+.personal_info {
+	padding: 20px 0;
+	background-color: #FFF;
+}
+.photo_wrap {
+	text-align: center;
+}
+.photo {
+	width: 90px;
+	height: 90px;
+	border-radius: 90px;
+}
+.nickname {
+	margin-top: 15px;
+	text-align: center;
+	color: #696969;
+}
+.wode_item_wrap {
+	background-color: #FFF;
+	font-size: 14px;
+	margin-top: 10px;
+	border-top: 1px solid #E5E5E5;
+}
+.wode_item {
+  height: 45px;
+	border-bottom: 1px solid #E5E5E5;
+	padding: 0 10px;
+	line-height: 45px;
+	position: relative;
+}
+.arrow_wrap {
+    position: absolute;
+    width: 50px;
+    height: 45px;
+    right: 0;
+    top: 0;
+    background-image: url(data:image/png;base64,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);
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 17px 14px;
+}
+.wode_out {
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	background-color: #FFF;
+	margin-top: 10px;
+	border-bottom: 1px solid #E5E5E5;
+	border-top: 1px solid #E5E5E5;
+}

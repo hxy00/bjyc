@@ -1,0 +1,34 @@
+
+<!--index.wxml-->
+<view>
+  <view class="page-body" wx:for="{{items}}">
+
+    <!--   
+    <view  data-url="{{item.url}}" bindtap = "onItemClick">
+       <image class= "image" mode="aspectFill" src="{{item.url}}"/>
+       <view class="title">{{item.title}}</view>
+    </view>
+     -->
+    <view class='item' data-text="{{item.desc}}|{{item.time}}|{{item.title}}|{{item.url}}|{{item.who}}" bindtap="onItemClick">
+      <view>
+        <image class='poster' mode="aspectFill" src="{{item.url}}" />
+        <view style='font-size=32rpx; margin: 25rpx; color: #3CB371;'>有效</view>
+      </view>
+      <view class='meta'>
+        <text class='title'>贵阳 —> 石阡</text>
+        <view class='artists'>
+          [车找人] 明早8点左右贵阳回石阡，有同路的联系。
+        </view>
+        <view class='time1'>
+          出行时间：<text>{{item.desc}}</text>
+        </view>
+        <button class='btn_tel' data-text="{{item.who}}">
+          Tel:{{item.who}}
+        </button>
+        <view class='time2'>
+          <text>创建时间：{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
