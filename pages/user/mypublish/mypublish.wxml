@@ -11,7 +11,7 @@
      -->
     <view class='item' data-text="{{item.desc}}|{{item.time}}|{{item.title}}|{{item.url}}|{{item.who}}" bindtap="onItemClick">
       <view>
-        <image class='poster' mode="aspectFill" src="{{item.url}}" />
+        <image class='poster' mode="aspectFill" src="{{photoUrl}}" />
         <view style='font-size=32rpx; margin: 25rpx; color: #3CB371;'>有效</view>
       </view>
       <view class='meta'>

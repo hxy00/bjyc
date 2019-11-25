@@ -10,12 +10,12 @@
     <!--地区选择框-->
     <view class="input-box first-box" data-text="cfd" catchtap="open">
       <view class="description">出发地</view>
-      <view class="add-input active" bindtap="open">{{province}}-{{city}}-{{county}}</view>
+      <view class="add-input active" data-text="cfd" bindtap="open">{{province}}-{{city}}-{{county}}</view>
       <image src="../../../images/index_location.jpg"></image>
     </view>
-    <view class="input-box first-box" data-text="mdd" catchtap="open1">
+    <view class="input-box first-box" data-text="mdd" catchtap="open">
       <view class="description">目的地</view>
-      <view class="add-input active" bindtap="open1">{{province1}}-{{city1}}-{{county1}}</view>
+      <view class="add-input active" data-text="mdd" bindtap="open">{{province1}}-{{city1}}-{{county1}}</view>
       <image src="../../../images/index_location.jpg"></image>
     </view>
     <!--详细地址输入-->
@@ -31,7 +31,7 @@
     </view> -->
     <!--房产产值查询按钮-->
     <view class="confirm-btn">
-      <button bindtap="getEstimateResult">确定</button>
+      <button bindtap="ensure">确定</button>
     </view>
   </view>
 </view>
@@ -42,7 +42,7 @@
 
 <!--地区自定义picker-->
 <view class="citypicker" wx:if="{{condition}}">
-  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 200px;" value="{{value}}" bindchange="bindChange" class="citybody">
     <view class="cityheader">
       <view bindtap="close" class="city-cancel">取消</view>
       <view bindtap="close" class="city-true">确定</view>
