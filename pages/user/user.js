@@ -11,17 +11,22 @@ Page({
         },
         onLoad: function() {
                 var that = this;
-                wx.login({
-                        success: function() {
-                                wx.getUserInfo({
-                                        success: function(res) {
-                                                that.setData({
-                                                        userInfo: res.userInfo
-                                                })
-                                        }
-                                })
-                        }
-                });
+                that.setData({
+                        userInfo: getApp().globalData.userInfo
+                })
+                // saveUserInfo(that); //保存用户数据
+                // wx.login({
+                //         success: function() {
+                //                 wx.getUserInfo({
+                //                         success: function(res) {
+                //                                 that.setData({
+                //                                         userInfo: res.userInfo
+                //                                 })
+                //                                 saveUserInfo(that); //保存用户数据
+                //                         }
+                //                 })
+                //         }
+                // });
         },
         onItemClick: function(event) {
                 console.log('itemClick');
@@ -50,7 +55,7 @@ Page({
                         icon: 'loading'
                 });
                 wx.request({
-                        url: Constant.TEST_URL,
+                        url: Constant.TEST_URL + '/testConnect',
                         header: {
                                 "Content-Type": "application/json"
                         },
@@ -74,3 +79,28 @@ Page({
                 });
         }
 })
+
+function saveUserInfo(that) {
+        wx.request({
+                url: Constant.TEST_URL + '/user/saveUserInfo',
+                data: {
+                        'nickName': that.data.userInfo.nickName,
+                        'avatarUrl': that.data.userInfo.avatarUrl,
+                        'gender': that.data.userInfo.gender,
+                        'country': that.data.userInfo.country,
+                        'province': that.data.userInfo.province,
+                        'city': that.data.userInfo.city,
+                        'lang': that.data.userInfo.language
+                },
+                header: {
+                        "Content-Type": "application/json"
+                },
+                success: function(res) {
+                        if (res == null) {
+                                console.error("用户数据保存失败");
+                        } else {
+                                console.log(res.data.retMsg);
+                        }
+                }
+        });
+}

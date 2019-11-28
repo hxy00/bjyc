@@ -31,7 +31,7 @@
     </view> -->
     <!--房产产值查询按钮-->
     <view class="confirm-btn">
-      <button bindtap="ensure">确定</button>
+      <button bindtap="ensure">保存</button>
     </view>
   </view>
 </view>

@@ -1,4 +1,5 @@
 var tcity = require("../../../utils/citys.js");
+var constant = require('../../../utils/constant.js');
 
 Page({
         /**
@@ -19,22 +20,25 @@ Page({
                 condition: false,
                 isSearching: false,
                 hasSelected: false,
-                idxType: ""
+                idxType: "",
+                userInfo: {}
         },
 
         /**
          * 生命周期函数--监听页面加载
          */
-        onLoad: function(options) {
+        onLoad: function (options) {
+                console.log("onLoad");
+                var that = this;
                 wx.showToast({
                         title: '载入中(•ᴗ•)',
                         icon: 'loading',
                         mask: true
                 });
 
-                var _that = this;
-                console.log("onLoad");
-                var that = this;
+                that.setData({
+                        userInfo: getApp().globalData.userInfo
+                })
                 tcity.init(that); //将城市列表载入data
                 var cityData = that.data.cityData;
                 const provinces = [];
@@ -51,7 +55,7 @@ Page({
         /**
          * 生命周期函数--监听页面初次渲染完成
          */
-        bindChange: function(event) { //当picker列表变化时，相应修改地区input中显示的位置值
+        bindChange: function (event) { //当picker列表变化时，相应修改地区input中显示的位置值
                 var val = event.detail.value;
                 var t = this.data.values;
                 var cityData = this.data.cityData;
@@ -152,7 +156,7 @@ Page({
                 }
         },
 
-        onfocus: function(event) { //打开搜索页面
+        onfocus: function (event) { //打开搜索页面
                 var city = this.data.city;
                 var county = this.data.county;
                 var province = this.data.province;
@@ -161,7 +165,7 @@ Page({
                 })
         },
 
-        open: function(event) { //打开地址选择picker
+        open: function (event) { //打开地址选择picker
                 var idxType = event.currentTarget.dataset.text;
                 this.setData({
                         condition: true,
@@ -177,61 +181,90 @@ Page({
                 }
         },
 
-        close: function() {
+        close: function () {
                 this.setData({
                         condition: false
                 });
         },
 
-        ensure: function() {
-                console.log(this.data.province + " " + this.data.province1);
-                console.log(this.data.city + " " + this.data.city1);
-                console.log(this.data.county + " " + this.data.county1);
-                console.log(this.data.value);
-                console.log(this.data.values);
+        ensure: function () { //确认
+                var origin = this.data.province + '-' + this.data.city + '-' + this.data.county;
+                var dest = this.data.province1 + '-' + this.data.city1 + '-' + this.data.county1;
+                wx.request({
+                        url: constant.TEST_URL + '/originAndDest/save',
+                        data: {
+                                'uid': this.data.userInfo.openId,
+                                'origin': origin,
+                                'destination': dest
+                        },
+                        header: {
+                                "Content-Type": "application/json"
+                        },
+                        success: function (res) {
+                                //debugger;
+                                if (res.data.retCode == 0) {
 
-                var pages = getCurrentPages(); // 获取页面栈
-                var currPage = pages[pages.length - 1]; // 当前页面
-                var prevPage = pages[pages.length - 2]; // 上一个页面
+                                        wx.navigateBack({
+                                                delta: 1
+                                        })
 
-                prevPage.setData({
-                        cfd: this.data.province + "-" + this.data.city + "-" + this.data.county,
-                        mdd: this.data.county1,
-                        mdd1: this.data.province + "-" + this.data.city + "-" + this.data.county
-                });
-
-                wx.navigateBack({
-                        delta: 1
+                                        wx.showToast({
+                                                title: '数据保存成功',
+                                                icon: 'success',
+                                                duration: 3000
+                                        })
+                                } else {
+                                        wx.showToast({
+                                                title: res.data.retMsg,
+                                                icon: 'none',
+                                                duration: 3000
+                                        })
+                                }
+                        }
                 })
+
+                // var pages = getCurrentPages(); // 获取页面栈
+                // var currPage = pages[pages.length - 1]; // 当前页面
+                // var prevPage = pages[pages.length - 2]; // 上一个页面
+
+                // prevPage.setData({
+                //         cfd: this.data.province + "-" + this.data.city + "-" + this.data.county,
+                //         mdd: this.data.county1,
+                //         mdd1: this.data.province + "-" + this.data.city + "-" + this.data.county
+                // });
+
+                // wx.navigateBack({
+                //         delta: 1
+                // })
         },
 
         /**
          * 生命周期函数--监听页面显示
          */
-        onShow: function() {},
+        onShow: function () { },
 
         /**
          * 生命周期函数--监听页面隐藏
          */
-        onHide: function() {},
+        onHide: function () { },
 
         /**
          * 生命周期函数--监听页面卸载
          */
-        onUnload: function() {},
+        onUnload: function () { },
 
         /**
          * 页面相关事件处理函数--监听用户下拉动作
          */
-        onPullDownRefresh: function() {},
+        onPullDownRefresh: function () { },
 
         /**
          * 页面上拉触底事件的处理函数
          */
-        onReachBottom: function() {},
+        onReachBottom: function () { },
 
         /**
          * 用户点击右上角分享
          */
-        onShareAppMessage: function() {}
+        onShareAppMessage: function () { }
 })

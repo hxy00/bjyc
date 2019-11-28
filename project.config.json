@@ -24,8 +24,8 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.3",
-	"appid": "wx1448b02b132e0e2b",
+	"libVersion": "2.9.4",
+	"appid": "wx2308094fa8c1c0cf",
 	"projectname": "bjyc",
 	"debugOptions": {
 		"hidedInDevtools": []
