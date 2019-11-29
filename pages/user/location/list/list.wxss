@@ -1,0 +1,57 @@
+/**index.wxss**/
+
+
+.item {
+        display: flex;
+        padding: 15rpx 15rpx;
+        border-bottom: 1rpx solid #eee;
+        cursor: pointer;
+}
+
+.item .meta {
+        flex: 1;
+}
+
+.item .meta .title, .item .meta .artists, .item .meta .time1, .item .meta .time2 {
+        display: block;
+        margin: 15rpx;
+}
+
+.item .meta .artists {
+        font-size: 34rpx;
+}
+
+.item .time1 {
+        font-size: 34rpx;
+}
+
+.item .time2 {
+        font-size: 34rpx;
+        color: #999;
+        margin-top: 15rpx;
+}
+
+.btn_tel {
+        width: 100%;
+        background-color: #f5f5f5;
+        border-radius: 8rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+}
+.localParent {
+        display: flex;
+  	align-items: center;
+          margin-top: 10rpx;
+  	/* justify-content: center; */
+}
+.localImg{
+       width:40rpx;
+       height:40rpx; 
+}
+.localText{
+  font-size:0.8rem;
+  color:#0AAAF6;
+  /* margin-top: 10rpx; */
+}

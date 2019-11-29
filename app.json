@@ -1,44 +1,45 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/details/details",
-    "pages/logs/logs",
-    "pages/user/user",
-    "pages/user/collect/collect",
-    "pages/user/location/location",
-    "pages/user/mypublish/mypublish"
-
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "便捷约车",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#d81e06",
-    "borderStyle": "black",
-    "list": [
-      {
-        "selectedIconPath": "images/menuicon/index1.png",
-        "iconPath": "images/menuicon/index.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "selectedIconPath": "images/menuicon/list1.png",
-        "iconPath": "images/menuicon/list.png",
-        "pagePath": "pages/logs/logs",
-        "text": "列表"
-      },
-      {
-        "selectedIconPath": "images/menuicon/user1.png",
-        "iconPath": "images/menuicon/user.png",
-        "pagePath": "pages/user/user",
-        "text": "个人中心"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+        "pages": [
+                "pages/login",
+                "pages/index/index",
+                "pages/details/details",
+                "pages/logs/logs",
+                "pages/user/user",
+                "pages/user/collect/collect",
+                "pages/user/location/location",
+                "pages/user/location/list/list",
+                "pages/user/mypublish/mypublish"
+        ],
+        "window": {
+                "backgroundTextStyle": "light",
+                "navigationBarBackgroundColor": "#fff",
+                "navigationBarTitleText": "便捷约车",
+                "navigationBarTextStyle": "black"
+        },
+        "tabBar": {
+                "color": "#a9b7b7",
+                "selectedColor": "#d81e06",
+                "borderStyle": "black",
+                "list": [
+                        {
+                                "selectedIconPath": "images/menuicon/index1.png",
+                                "iconPath": "images/menuicon/index.png",
+                                "pagePath": "pages/index/index",
+                                "text": "首页"
+                        },
+                        {
+                                "selectedIconPath": "images/menuicon/list1.png",
+                                "iconPath": "images/menuicon/list.png",
+                                "pagePath": "pages/logs/logs",
+                                "text": "列表"
+                        },
+                        {
+                                "selectedIconPath": "images/menuicon/user1.png",
+                                "iconPath": "images/menuicon/user.png",
+                                "pagePath": "pages/user/user",
+                                "text": "个人中心"
+                        }
+                ]
+        },
+        "sitemapLocation": "sitemap.json"
 }

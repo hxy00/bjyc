@@ -12,7 +12,7 @@ Page({
         onLoad: function() {
                 var that = this;
                 that.setData({
-                        userInfo: getApp().globalData.userInfo
+                        userInfo: app.globalData.userInfo
                 })
                 // saveUserInfo(that); //保存用户数据
                 // wx.login({
@@ -30,7 +30,7 @@ Page({
         },
         onItemClick: function(event) {
                 console.log('itemClick');
-                var targetUrl = "/pages/user/location/location";
+                var targetUrl = "/pages/user/location/list/list";
                 // if (event.currentTarget.dataset.url != null)
                 //   targetUrl = targetUrl + "?url=" + event.currentTarget.dataset.url;
                 wx.navigateTo({
