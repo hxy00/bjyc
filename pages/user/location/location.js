@@ -190,6 +190,36 @@ Page({
         ensure: function () { //确认
                 var origin = this.data.province + '-' + this.data.city + '-' + this.data.county;
                 var dest = this.data.province1 + '-' + this.data.city1 + '-' + this.data.county1;
+                if (origin == ''){
+                        wx.showToast({
+                                title: '请选择出发地',
+                                icon: 'none',
+                                duration: 3000
+                        })
+                        return;
+                } else if (origin.indexOf("--") >= 0 || origin.indexOf("undefined") >= 0){
+                        wx.showToast({
+                                title: '请正确选择出发地',
+                                icon: 'none',
+                                duration: 3000
+                        })
+                        return;
+                }
+                if (dest == '') {
+                        wx.showToast({
+                                title: '请选择目的地',
+                                icon: 'none',
+                                duration: 3000
+                        })
+                        return;
+                } else if (dest.indexOf("--") >= 0 || dest.indexOf("undefined") >= 0){
+                        wx.showToast({
+                                title: '请正确选择目的地',
+                                icon: 'none',
+                                duration: 3000
+                        })
+                        return;
+                }
                 wx.request({
                         url: constant.TEST_URL + '/originAndDest/save',
                         data: {
@@ -201,8 +231,9 @@ Page({
                                 "Content-Type": "application/json"
                         },
                         success: function (res) {
-                                //debugger;
                                 if (res.data.retCode == 0) {
+                                        var pages = getCurrentPages()
+                                        pages[pages.length - 2].onLoad()  
 
                                         wx.navigateBack({
                                                 delta: 1
@@ -222,49 +253,5 @@ Page({
                                 }
                         }
                 })
-
-                // var pages = getCurrentPages(); // 获取页面栈
-                // var currPage = pages[pages.length - 1]; // 当前页面
-                // var prevPage = pages[pages.length - 2]; // 上一个页面
-
-                // prevPage.setData({
-                //         cfd: this.data.province + "-" + this.data.city + "-" + this.data.county,
-                //         mdd: this.data.county1,
-                //         mdd1: this.data.province + "-" + this.data.city + "-" + this.data.county
-                // });
-
-                // wx.navigateBack({
-                //         delta: 1
-                // })
-        },
-
-        /**
-         * 生命周期函数--监听页面显示
-         */
-        onShow: function () { },
-
-        /**
-         * 生命周期函数--监听页面隐藏
-         */
-        onHide: function () { },
-
-        /**
-         * 生命周期函数--监听页面卸载
-         */
-        onUnload: function () { },
-
-        /**
-         * 页面相关事件处理函数--监听用户下拉动作
-         */
-        onPullDownRefresh: function () { },
-
-        /**
-         * 页面上拉触底事件的处理函数
-         */
-        onReachBottom: function () { },
-
-        /**
-         * 用户点击右上角分享
-         */
-        onShareAppMessage: function () { }
+        }
 })

@@ -1,20 +1,24 @@
 <!--index.wxml-->
 <view>
-        <view class="page-body" wx:for="{{items}}">
+        <view class="page-body" wx:for="{{items}}" bindtap="onItemClick" data-text="{{item.id}}">
                 <view class='item' data-text="">
                         <view class='meta'>
                                 <view class="localParent">
                                         <image class='localImg' src='/images/cfd.png'></image>
-                                        <text class='localText' >{{item.origin}}</text>
+                                        <text class='localText'>{{item.origin}}</text>
                                 </view>
                                 <view class="localParent">
                                         <image class='localImg' src='/images/mdd.png'></image>
-                                        <text class='localText' >{{item.destination}}</text>
+                                        <text class='localText'>{{item.destination}}</text>
                                 </view>
                                 <view class='time2'>
                                         <text>创建时间：{{item.createAt}}</text>
                                 </view>
                         </view>
                 </view>
+        </view>
+
+        <view>
+                <button bindtap="add" class="confirm-btn">新增</button>
         </view>
 </view>

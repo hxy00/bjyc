@@ -55,3 +55,12 @@
   color:#0AAAF6;
   /* margin-top: 10rpx; */
 }
+
+.confirm-btn {
+  /* margin-top: 80rpx; */
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80rpx;
+  margin-bottom:  80rpx;
+}

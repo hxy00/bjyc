@@ -2,52 +2,52 @@
 //获取应用实例
 var app = getApp();
 Page({
-  data: {
-    items: [],
-    hidden: false,
-    loading: false,
-    // loadmorehidden:true,
-    plain: false
-  },
+        data: {
+                items: [],
+                hidden: false,
+                loading: false,
+                // loadmorehidden:true,
+                plain: false
+        },
 
-  onItemClick: function (event) {
-    console.log('itemClick');
-    var targetUrl = "/pages/details/details";
-    if (event.currentTarget.dataset.text != null)
-      targetUrl = targetUrl + "?param=" + event.currentTarget.dataset.text;
-    wx.navigateTo({
-      url: targetUrl
-    });
-  },
+        onItemClick: function(event) {
+                console.log('itemClick');
+                var targetUrl = "/pages/details/details";
+                if (event.currentTarget.dataset.text != null)
+                        targetUrl = targetUrl + "?param=" + event.currentTarget.dataset.text;
+                wx.navigateTo({
+                        url: targetUrl
+                });
+        },
 
-  // loadMore: function( event ) {
-  //   var that = this
-  //   requestData( that, mCurrentPage + 1 );
-  // },
+        // loadMore: function( event ) {
+        //   var that = this
+        //   requestData( that, mCurrentPage + 1 );
+        // },
 
-  onReachBottom: function () {
-    var that = this
-    that.setData({
-      hidden: false,
-    });
-    requestData(that, mCurrentPage + 1);
-  },
+        onReachBottom: function() {
+                var that = this
+                that.setData({
+                        hidden: false,
+                });
+                requestData(that, mCurrentPage + 1);
+        },
 
-  onLoad: function () {
-    var that = this
-    requestData(that, mCurrentPage + 1);
-  },
+        onLoad: function() {
+                var that = this
+                requestData(that, mCurrentPage + 1);
+        },
 
-  makePhoneCall: function(e){
-    // console.log(e)
-    // console.log(e.currentTarget.dataset.text)
-    wx.makePhoneCall({
-      phoneNumber: e.currentTarget.dataset.text,
-      success(){
-        // console.log('拨打成功')
-      }
-    })
-  }
+        makePhoneCall: function(e) {
+                // console.log(e)
+                // console.log(e.currentTarget.dataset.text)
+                wx.makePhoneCall({
+                        phoneNumber: e.currentTarget.dataset.text,
+                        success() {
+                                // console.log('拨打成功')
+                        }
+                })
+        }
 })
 
 /**
@@ -70,45 +70,51 @@ var Constant = require('../../utils/constant.js');
  * @param targetPage 请求的目标页码
  */
 function requestData(that, targetPage) {
-  wx.showToast({
-    title: '加载中',
-    icon: 'loading'
-  });
-  wx.request({
-    url: Constant.GET_MEIZHI_URL + targetPage,
-    header: {
-      "Content-Type": "application/json"
-    },
-    success: function (res) {
-      if (res == null ||
-        res.data == null ||
-        res.data.results == null ||
-        res.data.results.length <= 0) {
+        wx.showToast({
+                title: '加载中',
+                icon: 'loading'
+        });
+        wx.request({
+                url: Constant.GET_MEIZHI_URL + targetPage,
+                header: {
+                        "Content-Type": "application/json"
+                },
+                success: function(res) {
+                        if (res == null ||
+                                res.data == null ||
+                                res.data.results == null ||
+                                res.data.results.length <= 0) {
 
-        console.error("god bless you...");
-        return;
-      }
+                                console.error("god bless you...");
+                                return;
+                        }
 
 
-      for (var i = 0; i < res.data.results.length; i++)
-        bindData(res.data.results[i]);
+                        for (var i = 0; i < res.data.results.length; i++)
+                                bindData(res.data.results[i]);
 
-      //将获得的各种数据写入itemList，用于setData
-      var itemList = [];
-      for (var i = 0; i < mUrl.length; i++)
-        itemList.push({ url: mUrl[i], desc: mDesc[i], who: mWho[i], time: mTimes[i], title: mTitles[i] });
+                        //将获得的各种数据写入itemList，用于setData
+                        var itemList = [];
+                        for (var i = 0; i < mUrl.length; i++)
+                                itemList.push({
+                                        url: mUrl[i],
+                                        desc: mDesc[i],
+                                        who: mWho[i],
+                                        time: mTimes[i],
+                                        title: mTitles[i]
+                                });
 
-      that.setData({
-        items: itemList,
-        hidden: true,
-        // loadmorehidden:false,
-      });
+                        that.setData({
+                                items: itemList,
+                                hidden: true,
+                                // loadmorehidden:false,
+                        });
 
-      mCurrentPage = targetPage;
+                        mCurrentPage = targetPage;
 
-      wx.hideToast();
-    }
-  });
+                        wx.hideToast();
+                }
+        });
 }
 
 /**
@@ -116,14 +122,14 @@ function requestData(that, targetPage) {
  * @param itemData Gank.io返回的content;
  */
 function bindData(itemData) {
-  var url = itemData.url.replace("//ww", "//ws");
-  var desc = itemData.desc;
-  var who = itemData.who;
-  var times = itemData.publishedAt.replace("T", " ").split(".")[0];
+        var url = itemData.url.replace("//ww", "//ws");
+        var desc = itemData.desc;
+        var who = itemData.who;
+        var times = itemData.publishedAt.replace("T", " ").split(".")[0];
 
-  mUrl.push(url);
-  mDesc.push(desc);
-  mWho.push(who);
-  mTimes.push(times);
-  mTitles.push("publish by：" + "@" + who + " —— " + times);
+        mUrl.push(url);
+        mDesc.push(desc);
+        mWho.push(who);
+        mTimes.push(times);
+        mTitles.push("publish by：" + "@" + who + " —— " + times);
 }
