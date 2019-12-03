@@ -4,11 +4,14 @@
                 "pages/index/index",
                 "pages/details/details",
                 "pages/logs/logs",
+                "pages/fl/fuli",
+                "pages/fl/details/dts",
                 "pages/user/user",
                 "pages/user/collect/collect",
                 "pages/user/location/location",
                 "pages/user/location/list/list",
-                "pages/user/mypublish/mypublish"
+                "pages/user/mypublish/mypublish",
+                "pages/user/mypublish/publish/publish"
         ],
         "window": {
                 "backgroundTextStyle": "light",
@@ -28,10 +31,10 @@
                                 "text": "首页"
                         },
                         {
-                                "selectedIconPath": "images/menuicon/list1.png",
-                                "iconPath": "images/menuicon/list.png",
-                                "pagePath": "pages/logs/logs",
-                                "text": "列表"
+                                "selectedIconPath": "images/menuicon/fl1.png",
+                                "iconPath": "images/menuicon/fl.png",
+                                "pagePath": "pages/fl/fuli",
+                                "text": "福利"
                         },
                         {
                                 "selectedIconPath": "images/menuicon/user1.png",

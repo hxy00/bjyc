@@ -1,0 +1,63 @@
+<!--index.wxml-->
+<view class="page">
+        <form bindsubmit="formSubmit" bindreset="formReset">
+                <view class="txt0">
+                        <text>* 出行类别：</text>
+                </view>
+                <view class='top'>
+                        <!-- 下拉框 -->
+                        <view class='top-selected' data-txet='{{grade_name2}}' bindtap='bindShowMsg2'>
+                                <!-- <text>{{grade_name2}}</text> -->
+                                <input name="title" value="{{grade_name2}}" disabled="disabled" />
+                        </view>
+                        <!-- 下拉需要显示的列表 -->
+                        <view class="select_box" wx:if="{{select2}}">
+                                <view wx:for="{{grades}}" wx:key="unique">
+                                        <view class="select_one" bindtap="mySelect2" data-name="{{item}}">{{item}}</view>
+                                </view>
+                        </view>
+                </view>
+
+                <view class="txt">
+                        <text>* 行驶方向：</text>
+                </view>
+                <view class='top'>
+                        <!-- 下拉框 -->
+                        <view class='top-selected' bindtap='bindShowMsg'>
+                                <!-- <text>{{grade_name}}</text> -->
+                                <input name="direction" value="{{grade_name}}" disabled="disabled" />
+                        </view>
+                        <!-- 下拉需要显示的列表 -->
+                        <view class="select_box" wx:if="{{select}}">
+                                <view wx:for="{{items}}" wx:key="unique">
+                                        <view class="select_one" bindtap="mySelect" data-name="{{item.txt}}">{{item.txt}}</view>
+                                </view>
+                        </view>
+                </view>
+
+                <view class="txt">
+                        <text>* 手机号：</text>
+                </view>
+                <view class="section">
+                        <input name="cellPhone" placeholder="请输入联系电话" />
+                </view>
+
+                <view class="txt">
+                        <text>* 出行时间：</text>
+                </view>
+                <view class="section">
+                        <picker name="ttimer" class='time-picker' mode="multiSelector" bindchange="bindStartMultiPickerChange" bindtap='pickerTap' bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">{{startDate}}</picker>
+                </view>
+
+                <view class="txt">
+                        <text>* 内容(150字以内)：</text>
+                </view>
+                <view class="section">
+                        <textarea name="content" focus="{{focus}}" placeholder="请输入描述内容" />
+                </view>
+
+                <view>
+                        <button formType="submit" class="confirm-btn">保存</button>
+                </view>
+        </form>
+</view>

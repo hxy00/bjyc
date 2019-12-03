@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view>
+        <view class="page-body" wx:for="{{items}}">
+                <view class='item' data-text="{{item.url}}" bindtap="onItemClick">
+                        <view>
+                                <image class='poster' mode="aspectFill" src="{{item.url}}" />
+                                <view style='font-size=32rpx; margin: 25rpx; color: #3CB371;'>{{item.type}}</view>
+                        </view>
+                        <view class='meta'>
+                                <text class='title'>作者：{{item.who}}</text>
+                                <view class='artists'>
+                                        来源：{{item.source}}
+                                </view>
+                                <view class='time1'>
+                                        发布时间：
+                                        <text>{{item.publishTime}}</text>
+                                </view>
+                                <!-- <button class='btn_tel' catchtap="makePhoneCall" disabled="{{disabled}}" data-text="{{item.who}}">
+                                                Tel:{{item.who}}
+                                        </button> -->
+                                <view class='time2'>
+                                        <text>创建时间：{{item.createTime}}</text>
+                                </view>
+                        </view>
+                </view>
+        </view>
+
+</view>

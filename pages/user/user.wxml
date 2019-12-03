@@ -1,18 +1,3 @@
-<!--index.wxml-->
-<!-- <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view> -->
-
-<!--pages/user-detail/user-detail.wxml-->
 <view class="personal_info">
         <view class="photo_wrap">
                 <image src="{{userInfo.avatarUrl}}" class="photo"></image>
@@ -27,7 +12,7 @@
 		<span class="arrow_wrap"></span>
 	</view> -->
         <view class="wode_item" bindtap="onItemClick">
-                方位
+                行驶方向
                 <span class="arrow_wrap"></span>
         </view>
         <!-- <view class="wode_item" bindtap="collect">
@@ -38,6 +23,10 @@
                 我发布
                 <span class="arrow_wrap"></span>
         </view>
+        <view class="wode_item" bindtap="about">
+		关于
+		<span class="arrow_wrap"></span>
+	</view>
         <view class="wode_item" bindtap="testConnect">
                 测试连接
                 <span class="arrow_wrap"></span>

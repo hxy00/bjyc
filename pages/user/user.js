@@ -3,30 +3,13 @@ var Constant = require('../../utils/constant.js');
 
 Page({
         data: {
-                userInfo: {},
-                cfd: 'xxx',
-                mdd: 'xxx',
-                mdd1: '',
-                mode: ['我的收藏', '我的订单', '我的地址', '联系客服', '关于我们']
+                userInfo: {}
         },
         onLoad: function() {
                 var that = this;
                 that.setData({
                         userInfo: app.globalData.userInfo
                 })
-                // saveUserInfo(that); //保存用户数据
-                // wx.login({
-                //         success: function() {
-                //                 wx.getUserInfo({
-                //                         success: function(res) {
-                //                                 that.setData({
-                //                                         userInfo: res.userInfo
-                //                                 })
-                //                                 saveUserInfo(that); //保存用户数据
-                //                         }
-                //                 })
-                //         }
-                // });
         },
         onItemClick: function(event) {
                 console.log('itemClick');
@@ -43,11 +26,19 @@ Page({
                         url: targetUrl
                 });
         },
-        mypublish: function() {
-                var targetUrl = "/pages/user/mypublish/mypublish?photoUrl=" + this.data.userInfo.avatarUrl;
+        mypublish: function () {
+                // var targetUrl = "/pages/user/mypublish/mypublish?photoUrl=" + this.data.userInfo.avatarUrl;
+                var targetUrl = "/pages/user/mypublish/mypublish";
                 wx.navigateTo({
                         url: targetUrl
                 });
+        },
+        about: function(){
+                wx.showModal({
+                        title: '关于本系统',
+                        content: 'V2.1.0',
+                        showCancel: false,
+                })
         },
         testConnect: function() {
                 wx.showToast({
@@ -63,16 +54,15 @@ Page({
                                 console.log('test ---------->' + res)
                                 wx.showToast({
                                         icon: 'success',
-                                        title: res.data.retMsg,
+                                        title: '连接成功',
                                         duration: 3000
                                 })
-                                // wx.hideToast();
                         },
                         fail: function(res) {
                                 console.log(res)
                                 wx.showToast({
                                         icon: 'none',
-                                        title: res.errMsg,
+                                        title: '连接失败',
                                         duration: 3000
                                 })
                         }

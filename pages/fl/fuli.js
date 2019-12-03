@@ -1,12 +1,6 @@
-// 引入utils包下的js文件
-var Constant = require('../../utils/constant.js');
-var util = require('../../utils/util.js');
-
+//index.js
 //获取应用实例
 var app = getApp();
-
-var mCurrentPage = 0;
-
 Page({
         data: {
                 items: [],
@@ -18,7 +12,7 @@ Page({
 
         onItemClick: function(event) {
                 console.log('itemClick');
-                var targetUrl = "/pages/details/details";
+                var targetUrl = "/pages/fl/details/dts";
                 if (event.currentTarget.dataset.text != null)
                         targetUrl = targetUrl + "?param=" + event.currentTarget.dataset.text;
                 wx.navigateTo({
@@ -26,9 +20,9 @@ Page({
                 });
         },
 
-        // loadMore: function(event) {
-        //         var that = this
-        //         requestData(that, mCurrentPage + 1);
+        // loadMore: function( event ) {
+        //   var that = this
+        //   requestData( that, mCurrentPage + 1 );
         // },
 
         onReachBottom: function() {
@@ -57,56 +51,68 @@ Page({
 })
 
 /**
+ * 定义几个数组用来存取item中的数据
+ */
+var mUrl = [];
+var mDesc = [];
+var mWho = [];
+// var mTimes = [];
+// var mTitles = [];
+
+var mSource = [];
+var mType = [];
+var mPublishedAt = [];
+var mCreatedAt = [];
+
+
+var mCurrentPage = 0;
+
+// 引入utils包下的js文件
+var Constant = require('../../utils/constant.js');
+
+/**
  * 请求数据
  * @param that Page的对象，用来setData更新数据
  * @param targetPage 请求的目标页码
  */
-var itemList = [];
 function requestData(that, targetPage) {
         wx.showToast({
                 title: '加载中',
                 icon: 'loading'
         });
         wx.request({
-                url: Constant.TEST_URL + '/publish/getPage/',
+                url: Constant.GET_MEIZHI_URL + targetPage,
                 header: {
                         "Content-Type": "application/json"
-                },
-                data: {
-                        pageNum: targetPage
                 },
                 success: function(res) {
                         if (res == null ||
                                 res.data == null ||
-                                res.data.data == null ||
-                                res.data.data.list.length <= 0) {
+                                res.data.results == null ||
+                                res.data.results.length <= 0) {
 
-                                wx.showToast({
-                                        title: '暂没有获取到更多数据。',
-                                        icon: 'none',
-                                        duration: 3000
-                                })
+                                console.error("god bless you...");
                                 return;
                         }
 
-                        for (var i = 0; i < res.data.data.list.length; i++) {
-                                var createdAt = util.formatTimeTwo(res.data.data.list[i].createdAt, 'Y-M-D h:m:s');
-                                var publishedAt = util.formatTimeTwo(res.data.data.list[i].publishedAt, 'Y-M-D h:m:s');
-                                itemList.push({
-                                        createdAt: createdAt,
-                                        publishedAt: publishedAt,
-                                        goTime: res.data.data.list[i].goTime,
-                                        cellPhone: res.data.data.list[i].cellPhone,
-                                        title: res.data.data.list[i].title,
-                                        isValid: res.data.data.list[i].isValid,
-                                        direction: res.data.data.list[i].direction,
-                                        content: res.data.data.list[i].content,
-                                        nickName: res.data.data.list[i].nickName,
-                                        avatarUrl: res.data.data.list[i].avatarUrl
-                                });
-                        }
+
+                        for (var i = 0; i < res.data.results.length; i++)
+                                bindData(res.data.results[i]);
 
                         //将获得的各种数据写入itemList，用于setData
+                        var itemList = [];
+                        for (var i = 0; i < mUrl.length; i++)
+                                itemList.push({
+                                        url: mUrl[i],
+                                        desc: mDesc[i],
+                                        who: mWho[i],
+
+                                        createTime: mCreatedAt[i],
+                                        publishTime: mPublishedAt[i],
+                                        source: mSource[i],
+                                        type: mType[i]
+                                });
+
                         that.setData({
                                 items: itemList,
                                 hidden: true,
@@ -114,6 +120,31 @@ function requestData(that, targetPage) {
                         });
 
                         mCurrentPage = targetPage;
+
+                        wx.hideToast();
                 }
         });
+}
+
+/**
+ * 绑定接口中返回的数据
+ * @param itemData Gank.io返回的content;
+ */
+function bindData(itemData) {
+        var url = itemData.url.replace("//ww", "//ws");
+        var desc = itemData.desc;
+        var who = itemData.who;
+        var createTime = itemData.createdAt.replace("T", " ").split(".")[0];
+        var publishTime = itemData.publishedAt.replace("T", " ").split(".")[0];
+        var source = itemData.source;
+        var type = itemData.type;
+
+        mUrl.push(url);
+        mDesc.push(desc);
+        mWho.push(who);
+
+        mCreatedAt.push(createTime);
+        mPublishedAt.push(publishTime);
+        mSource.push(source);
+        mType.push(type);
 }

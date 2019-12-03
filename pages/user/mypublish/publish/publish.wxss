@@ -1,0 +1,128 @@
+.page {
+        margin: 10rpx;
+}
+
+.txt0 {
+        margin: 10rpx;
+        margin-top: 20rpx;
+        width: 96%;
+        color: rgb(50, 50, 50);
+        font-size: 36rpx;
+}
+
+.txt {
+        margin: 10rpx;
+        margin-top: 100rpx;
+        width: 96%;
+        color: rgb(50, 50, 50);
+        font-size: 36rpx;
+}
+
+.section {
+        border: 1px solid #ddd;
+        width: 96%;
+        margin: auto;
+        margin-top: 10rpx;
+        padding: 5rpx;
+}
+
+.confirm-btn {
+        /* margin-top: 80rpx; */
+        width: 97%;
+        display: flex;
+        justify-content: center;
+        margin-top: 80rpx;
+        margin-bottom: 80rpx;
+}
+
+.page .section input {
+        height: 70rpx;
+        font-size: 32rpx;
+        color: rgb(124, 124, 124);
+}
+
+.page .top .top-selected input {
+        height: 80rpx;
+        font-size: 32rpx;
+        color: rgb(124, 124, 124);
+}
+
+.page .section picker {
+        height: 70rpx;
+        font-size: 32rpx;
+        color: rgb(124, 124, 124);
+        margin: auto;
+        display: flex;
+        align-items: center;
+}
+
+.page .section textarea {
+        font-size: 32rpx;
+        color: rgb(124, 124, 124);
+        height: 200rpx;
+}
+
+/* 顶部 */
+
+.top {
+        width: 98%;
+        height: 60rpx;
+        line-height: 65rpx;
+        font-size: 34rpx;
+        margin-left: 10rpx;
+        margin-right: 10rpx;
+}
+
+.top-text {
+        float: left;
+}
+
+/* 下拉框 */
+
+.top-selected {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        padding: 0 10rpx;
+        font-size: 32rpx;
+        color: rgb(124, 124, 124);
+}
+
+/* 下拉内容 */
+
+.select_box {
+        background-color: #fff;
+        padding: 0 10rpx;
+        width: 65%;
+        float: right;
+        position: relative;
+        right: 0;
+        z-index: 1;
+        overflow: hidden;
+        text-align: left;
+        animation: myfirst 0.5s;
+        font-size: 30rpx;
+        border: 1px solid #ccc;
+}
+
+.select_one {
+        padding-left: 20rpx;
+        width: 100%;
+        height: 60rpx;
+        position: relative;
+        line-height: 60rpx;
+        border-bottom: 1px solid #ccc;
+}
+
+/* 下拉过度效果 */
+
+@keyframes myfirst {
+        from {
+                height: 0rpx;
+        }
+
+        to {
+                height: 210rpx;
+        }
+}
