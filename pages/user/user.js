@@ -46,7 +46,7 @@ Page({
                         icon: 'loading'
                 });
                 wx.request({
-                        url: Constant.TEST_URL + '/testConnect',
+                        url: Constant.TEST_URL + '/test/testConnect',
                         header: {
                                 "Content-Type": "application/json"
                         },

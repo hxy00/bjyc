@@ -12,8 +12,15 @@ Page({
                 items: [],
                 hidden: false,
                 loading: false,
-                // loadmorehidden:true,
                 plain: false
+        },
+
+        onLoad: function () {
+                var that = this
+
+                mCurrentPage = 0;
+                itemList = [];
+                requestData(that, mCurrentPage + 1);
         },
 
         onItemClick: function(event) {
@@ -39,20 +46,20 @@ Page({
                 requestData(that, mCurrentPage + 1);
         },
 
-        onLoad: function() {
-                var that = this
-                requestData(that, mCurrentPage + 1);
-        },
-
         makePhoneCall: function(e) {
                 // console.log(e)
                 // console.log(e.currentTarget.dataset.text)
                 wx.makePhoneCall({
                         phoneNumber: e.currentTarget.dataset.text,
                         success() {
-                                // console.log('拨打成功')
+                                console.log('拨打成功')
                         }
                 })
+        },
+
+        onPullDownRefresh: function(){
+                var that = this;  
+                that.onLoad(); //重新加载onLoad()
         }
 })
 

@@ -329,10 +329,13 @@ function requestData(that) {
 
                         //将获得的各种数据写入itemList，用于setData
                         var itemList = [];
-                        for (var i = 0; i < res.data.data.length; i++)
+                        for (var i = 0; i < res.data.data.length; i++) {
+                                var origin = res.data.data[i].origin.split('-')[1] + '/' + res.data.data[i].origin.split('-')[2];
+                                var destination = res.data.data[i].destination.split('-')[1] + '/' + res.data.data[i].destination.split('-')[2];
                                 itemList.push({
-                                        txt: res.data.data[i].origin.split('-')[2] + ' —> ' + res.data.data[i].destination.split('-')[2]
+                                        txt: origin + ' —> ' + destination
                                 });
+                        }
 
                         //数据存放于data中
                         that.setData({
@@ -451,8 +454,8 @@ function save(that, val){
 
                         //解析返回数据
                         if(res.data.retCode == 0){
-                                var pages = getCurrentPages()
-                                pages[pages.length - 2].onLoad()
+                                var pages = getCurrentPages();
+                                pages[pages.length - 2].onLoad();
 
                                 wx.navigateBack({
                                         delta: 1

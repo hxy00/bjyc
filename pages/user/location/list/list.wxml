@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view>
-        <view class="page-body" wx:for="{{items}}" bindtap="onItemClick" data-text="{{item.id}}">
+        <view class="page-body" wx:for="{{items}}" bindlongtap="onItemLongClick" data-text="{{item.id}}">
                 <view class='item' data-text="">
                         <view class='meta'>
                                 <view class="localParent">

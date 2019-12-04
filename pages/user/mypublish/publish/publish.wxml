@@ -25,7 +25,7 @@
                         <!-- 下拉框 -->
                         <view class='top-selected' bindtap='bindShowMsg'>
                                 <!-- <text>{{grade_name}}</text> -->
-                                <input name="direction" value="{{grade_name}}" disabled="disabled" />
+                                <input name="direction" value="{{grade_name}}" disabled="disabled" style="width: 100%" />
                         </view>
                         <!-- 下拉需要显示的列表 -->
                         <view class="select_box" wx:if="{{select}}">

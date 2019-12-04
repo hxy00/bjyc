@@ -29,7 +29,7 @@ Page({
                         url: '/pages/user/location/location',
                 })
         },
-        onItemClick: function (e) {
+        onItemLongClick: function (e) {
                 var that = this;
                 var id = e.currentTarget.dataset.text;
                 wx.showModal({

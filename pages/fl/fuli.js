@@ -1,13 +1,25 @@
 //index.js
 //获取应用实例
 var app = getApp();
+
+var mCurrentPage = 0;
+
+// 引入utils包下的js文件
+var Constant = require('../../utils/constant.js');
+
 Page({
         data: {
                 items: [],
                 hidden: false,
                 loading: false,
-                // loadmorehidden:true,
                 plain: false
+        },
+
+        onLoad: function () {
+                var that = this
+                mCurrentPage = 0;
+                mUrl = [];
+                requestData(that, mCurrentPage + 1);
         },
 
         onItemClick: function(event) {
@@ -33,11 +45,6 @@ Page({
                 requestData(that, mCurrentPage + 1);
         },
 
-        onLoad: function() {
-                var that = this
-                requestData(that, mCurrentPage + 1);
-        },
-
         makePhoneCall: function(e) {
                 // console.log(e)
                 // console.log(e.currentTarget.dataset.text)
@@ -47,6 +54,11 @@ Page({
                                 // console.log('拨打成功')
                         }
                 })
+        },
+
+        onPullDownRefresh: function () {
+                var that = this;
+                that.onLoad(); //重新加载onLoad()
         }
 })
 
@@ -65,10 +77,6 @@ var mPublishedAt = [];
 var mCreatedAt = [];
 
 
-var mCurrentPage = 0;
-
-// 引入utils包下的js文件
-var Constant = require('../../utils/constant.js');
 
 /**
  * 请求数据

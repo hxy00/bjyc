@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view>
         <view class="page-body" wx:for="{{items}}">
-                <view class='item' data-text="{{item.content}}|{{item.createdAt}}|{{item.title}}|{{item.avatarUrl}}|{{item.nickName}}" bindtap="onItemClick">
+                <view class='item' data-text="{{item.content}}|{{item.createdAt}}|{{item.title}}|{{item.avatarUrl}}|{{item.nickName}}|{{item.id}}" bindtap="onItemClick" bindlongtap="onItemLongClick">
                         <view>
                                 <image class='poster' mode="aspectFill" src="{{userInfo.avatarUrl}}" />
                                 <view wx:if="{{item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>

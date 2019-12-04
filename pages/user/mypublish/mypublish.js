@@ -2,8 +2,6 @@
 var Constant = require('../../../utils/constant.js');
 var util = require('../../../utils/util.js');
 
-var mCurrentPage = 0;
-
 //获取应用实例
 var app = getApp();
 Page({
@@ -22,11 +20,14 @@ Page({
                 this.setData({
                         userInfo: app.globalData.userInfo
                 });
+
                 //请求数据
+                mCurrentPage = 0;
+                itemList = [];
                 requestData(that, mCurrentPage + 1);
         },
 
-        onItemClick: function(event) {
+        onItemClick: function (event) {
                 console.log('itemClick');
                 var targetUrl = "/pages/details/details";
                 if (event.currentTarget.dataset.text != null)
@@ -36,12 +37,58 @@ Page({
                 });
         },
 
-        loadMore: function(event) {
-                var that = this
-                requestData(that, mCurrentPage + 1);
+        onItemLongClick: function (event) {
+                var that = this;
+                if (event.currentTarget.dataset.text != null) {
+                        var txt = event.currentTarget.dataset.text;
+                        var id = txt.split("|")[5];
+                        wx.showModal({
+                                title: '删除',
+                                content: '确定删除吗？',
+                                success(res) {
+                                        console.log(res)
+                                        if (res.confirm) {
+                                                wx.request({
+                                                        url: Constant.TEST_URL + '/publish/delete',
+                                                        header: {
+                                                                "Content-Type": "application/json"
+                                                        },
+                                                        data: {
+                                                                id: id,
+                                                                uId: that.data.userInfo.openId
+                                                        },
+                                                        success: function(res) {
+                                                                if (res.data.retCode == 0) {
+                                                                        that.onLoad();
+                                                                        wx.showToast({
+                                                                                title: '删除成功',
+                                                                                icon: 'success',
+                                                                                duration: 3000
+                                                                        })
+                                                                } else {
+                                                                        wx.showToast({
+                                                                                title: '删除失败，请稍后重试',
+                                                                                icon: 'none',
+                                                                                duration: 3000
+                                                                        })  
+                                                                }
+                                                        }
+                                                })
+
+                                        } else {
+                                                console.log('用户点击取消')
+                                        }
+                                }
+                        })
+                }
         },
 
-        onReachBottom: function() {
+        // loadMore: function(event) {
+        //         var that = this
+        //         requestData(that, mCurrentPage + 1);
+        // },
+
+        onReachBottom: function () {
                 var that = this
                 that.setData({
                         hidden: false,
@@ -49,10 +96,15 @@ Page({
                 requestData(that, mCurrentPage + 1);
         },
 
-        publish: function(e) {
+        publish: function (e) {
                 wx.navigateTo({
                         url: '/pages/user/mypublish/publish/publish',
                 })
+        },
+
+        onPullDownRefresh: function () {
+                var that = this;
+                that.onLoad(); //重新加载onLoad()
         }
 })
 
@@ -61,6 +113,7 @@ Page({
  * @param that Page的对象，用来setData更新数据
  * @param targetPage 请求的目标页码
  */
+var mCurrentPage = 0;
 var itemList = [];
 function requestData(that, targetPage) {
         wx.showToast({
@@ -76,7 +129,7 @@ function requestData(that, targetPage) {
                         pageNum: targetPage,
                         uId: that.data.userInfo.openId
                 },
-                success: function(res) {
+                success: function (res) {
                         if (res == null ||
                                 res.data == null ||
                                 res.data.data == null ||
@@ -96,6 +149,7 @@ function requestData(that, targetPage) {
                                 itemList.push({
                                         createdAt: createdAt,
                                         publishedAt: publishedAt,
+                                        id: res.data.data.list[i].id,
                                         goTime: res.data.data.list[i].goTime,
                                         cellPhone: res.data.data.list[i].cellPhone,
                                         title: res.data.data.list[i].title,

@@ -87,6 +87,7 @@
         padding: 0 10rpx;
         font-size: 32rpx;
         color: rgb(124, 124, 124);
+        widows: 100%;
 }
 
 /* 下拉内容 */
@@ -107,7 +108,7 @@
 }
 
 .select_one {
-        padding-left: 20rpx;
+        padding-left: 10rpx;
         width: 100%;
         height: 60rpx;
         position: relative;
