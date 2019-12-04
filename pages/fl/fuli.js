@@ -81,23 +81,26 @@ function requestData(that, targetPage) {
                 icon: 'loading'
         });
         wx.request({
-                url: Constant.GET_MEIZHI_URL + targetPage,
+                url: Constant.TEST_URL + '/fuli/getFuLi',
                 header: {
                         "Content-Type": "application/json"
+                },
+                data: {
+                        pageNum: targetPage
                 },
                 success: function(res) {
                         if (res == null ||
                                 res.data == null ||
-                                res.data.results == null ||
-                                res.data.results.length <= 0) {
+                                res.data.data == null ||
+                                res.data.data.length <= 0) {
 
                                 console.error("god bless you...");
                                 return;
                         }
 
 
-                        for (var i = 0; i < res.data.results.length; i++)
-                                bindData(res.data.results[i]);
+                        for (var i = 0; i < res.data.data.length; i++)
+                                bindData(res.data.data[i]);
 
                         //将获得的各种数据写入itemList，用于setData
                         var itemList = [];
