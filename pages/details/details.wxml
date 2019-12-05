@@ -1,35 +1,52 @@
 <!--details.wxml-->
 <view>
-  <view>
-    <loading hidden="{{hidden}}">
-      {{loadingText}}
-    </loading>
+        <view>
+                <loading hidden="{{hidden}}">
+                        {{loadingText}}
+                </loading>
+                <toast hidden="{{toastHidden}}" bindchange="onToastChanged">
+                        {{toastText}}
+                </toast>
+        </view>
 
-    <toast hidden="{{toastHidden}}" bindchange="onToastChanged">
-      {{toastText}}
-    </toast>
+        <view class="personal_info">
+                <view class="photo_wrap">
+                        <image src="{{publishInfo.avatarUrl}}" class="photo"></image>
+                </view>
+                <view class="nickname">
+                        {{publishInfo.nickName}}
+                </view>
+        </view>
 
-    <view class="content">
-      <view class="title">
-        {{title}}
-      </view>
-      <view bindlongtap="onlongclick">
-        <image class="bigImage" mode="aspectFill" src="{{url}}" />
-      </view>
-      <view>
-        {{desc}}
-      </view>
-      <view>
-        {{who}}
-      </view>
-      <view>
-        {{time}}
-      </view>
-    </view>
+        <view class="divLine"></view>
 
+        <view class="content">
+                <view class="title-cellPhone">
+                        <view class="title">【{{publishInfo.title}}】</view>
+                        <view class="cellPhone" data-text="{{publishInfo.cellPhone}}" bindtap="makePhoneCall">{{publishInfo.cellPhone}}</view>
+                </view>
 
-    <modal title="是否保存？" confirm-text="保存" cancel-text="取消" data-url="{{url}}" hidden="{{modalHidden}}" bindconfirm="onSaveClick" bindcancel="onCancelClick">
-    </modal>
-
-  </view>
+                <view class="direction">
+                        <view class="txt">行驶方向：</view>
+                        <view>{{publishInfo.direction}}</view>
+                </view>
+                <view class="goTime">
+                        <view class="txt">出行时间：</view>
+                        <view> {{publishInfo.goTime}} </view>
+                </view>
+                <view class="contents">
+                        <view class="txt"> 发布内容：</view>
+                        <view style="margin-top: 20rpx;"></view>
+                        <text class="contents-val" decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{publishInfo.content}}</text>
+                </view>
+                <view class="createTime">
+                        <view class="txt">创建时间：</view>
+                        <view> {{publishInfo.createdAt}}</view>
+                </view>
+                <view class="isValid">
+                        <view class="txt">是否有效：</view>
+                        <view wx:if="{{publishInfo.isValid == 1}}" style='font-size=32rpx; color: #d81e06;'>有效</view>
+                        <view wx:else style='font-size=32rpx; color: gray;'>失效</view>
+                </view>
+        </view>
 </view>

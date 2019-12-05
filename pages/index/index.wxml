@@ -4,7 +4,7 @@
 
         <block wx:else>
                 <view class="page-body" wx:for="{{items}}">
-                        <view class='item' data-text="{{item.content}}|{{item.createdAt}}|{{item.title}}|{{item.avatarUrl}}|{{item.nickName}}" bindtap="onItemClick">
+                        <view class='item' data-text="{{item}}" bindtap="onItemClick">
                                 <view>
                                         <image class='poster' mode="aspectFill" src="{{item.avatarUrl}}" />
                                         <view wx:if="{{item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
@@ -22,10 +22,10 @@
                                                 <text wx:else>{{item.publishedAt}}</text>
                                         </view>
                                         <button class='btn_tel' catchtap="makePhoneCall" disabled="{{disabled}}" data-text="{{item.cellPhone}}">
-                                                Tel:{{item.cellPhone}}
+                                                Tel: {{item.cellPhone}}
                                         </button>
                                         <view class='time2'>
-                                                <text>创建时间：{{item.createdAt}}</text>
+                                                创建时间：<text>{{item.createdAt}}</text>
                                         </view>
                                 </view>
                         </view>

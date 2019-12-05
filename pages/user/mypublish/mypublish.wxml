@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view>
         <view class="page-body" wx:for="{{items}}">
-                <view class='item' data-text="{{item.content}}|{{item.createdAt}}|{{item.title}}|{{item.avatarUrl}}|{{item.nickName}}|{{item.id}}" bindtap="onItemClick" bindlongtap="onItemLongClick">
+                <view class='item' data-text="{{item}}" bindtap="onItemClick" bindlongtap="onItemLongClick">
                         <view>
                                 <image class='poster' mode="aspectFill" src="{{userInfo.avatarUrl}}" />
                                 <view wx:if="{{item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
@@ -22,7 +22,7 @@
                                         Tel:{{item.cellPhone}}
                                 </button> -->
                                 <view class='time2'>
-                                        <text>创建时间：{{item.createdAt}}</text>
+                                        创建时间：<text>{{item.createdAt}}</text>
                                 </view>
                         </view>
                 </view>

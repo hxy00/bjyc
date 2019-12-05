@@ -7,26 +7,18 @@
         </view>
 </view>
 <view class="wode_item_wrap">
-        <!-- <view class="wode_item" wx:for="{{mode}}" bindtap="onItemClick">
-		{{item}}
-		<span class="arrow_wrap"></span>
-	</view> -->
         <view class="wode_item" bindtap="onItemClick">
                 行驶方向
                 <span class="arrow_wrap"></span>
         </view>
-        <!-- <view class="wode_item" bindtap="collect">
-		收藏
-		<span class="arrow_wrap"></span>
-	</view> -->
         <view class="wode_item" bindtap="mypublish">
                 我发布
                 <span class="arrow_wrap"></span>
         </view>
         <view class="wode_item" bindtap="about">
-		关于
-		<span class="arrow_wrap"></span>
-	</view>
+                关于
+                <span class="arrow_wrap"></span>
+        </view>
         <view class="wode_item" bindtap="testConnect">
                 测试连接
                 <span class="arrow_wrap"></span>

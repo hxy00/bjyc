@@ -1,6 +1,5 @@
 /**index.wxss**/
 
-
 .item {
         display: flex;
         padding: 15rpx 15rpx;
@@ -26,7 +25,7 @@
 }
 
 .item .time2 {
-        font-size: 34rpx;
+        font-size: 30rpx;
         color: #999;
         margin-top: 15rpx;
 }
@@ -40,27 +39,30 @@
         align-items: center;
         justify-content: center;
 }
+
 .localParent {
         display: flex;
-  	align-items: center;
-          margin-top: 10rpx;
-  	/* justify-content: center; */
+        align-items: center;
+        margin-top: 10rpx;
+        /* justify-content: center; */
 }
-.localImg{
-       width:40rpx;
-       height:40rpx; 
+
+.localImg {
+        width: 40rpx;
+        height: 40rpx;
 }
-.localText{
-  font-size:0.8rem;
-  color:#0AAAF6;
-  /* margin-top: 10rpx; */
+
+.localText {
+        font-size: 34rpx;
+        color: #0aaaf6;
+        /* margin-top: 10rpx; */
 }
 
 .confirm-btn {
-  /* margin-top: 80rpx; */
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  margin-top: 80rpx;
-  margin-bottom:  80rpx;
+        /* margin-top: 80rpx; */
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        margin-top: 80rpx;
+        margin-bottom: 80rpx;
 }

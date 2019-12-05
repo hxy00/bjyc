@@ -188,8 +188,8 @@ Page({
         },
 
         ensure: function () { //确认
-                var origin = this.data.province + '-' + this.data.city + '-' + this.data.county;
-                var dest = this.data.province1 + '-' + this.data.city1 + '-' + this.data.county1;
+                var origin = this.data.province + '/' + this.data.city + '/' + this.data.county;
+                var dest = this.data.province1 + '/' + this.data.city1 + '/' + this.data.county1;
                 if (origin == ''){
                         wx.showToast({
                                 title: '请选择出发地',

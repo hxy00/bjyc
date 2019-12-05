@@ -26,11 +26,20 @@ Page({
         onItemClick: function(event) {
                 console.log('itemClick');
                 var targetUrl = "/pages/details/details";
-                if (event.currentTarget.dataset.text != null)
-                        targetUrl = targetUrl + "?param=" + event.currentTarget.dataset.text;
-                wx.navigateTo({
-                        url: targetUrl
-                });
+                var params = event.currentTarget.dataset.text;
+                if (params != null) {
+                        var last = JSON.stringify(params); 
+                        targetUrl = targetUrl + "?param=" + last;
+                        wx.navigateTo({
+                                url: targetUrl
+                        });
+                } else{
+                        wx.showToast({
+                                title: '参数为空',
+                                icon: 'none',
+                                duration: 2000
+                        })
+                }
         },
 
         // loadMore: function(event) {
@@ -99,10 +108,17 @@ function requestData(that, targetPage) {
                         for (var i = 0; i < res.data.data.list.length; i++) {
                                 var createdAt = util.formatTimeTwo(res.data.data.list[i].createdAt, 'Y-M-D h:m:s');
                                 var publishedAt = util.formatTimeTwo(res.data.data.list[i].publishedAt, 'Y-M-D h:m:s');
+
+                                var goTime = res.data.data.list[i].goTime;
+                                var sp1 = goTime.split(' ');
+                                var sp2 = sp1[0].split('-');
+                                var sp3 = sp1[1].split(':');
+                                var fGoTime = sp2[1] + '月' + sp2[2] + '日' + ' ' + sp3[0] + '点' + sp3[1] + '分';
+                                
                                 itemList.push({
                                         createdAt: createdAt,
                                         publishedAt: publishedAt,
-                                        goTime: res.data.data.list[i].goTime,
+                                        goTime: fGoTime,
                                         cellPhone: res.data.data.list[i].cellPhone,
                                         title: res.data.data.list[i].title,
                                         isValid: res.data.data.list[i].isValid,

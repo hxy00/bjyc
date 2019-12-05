@@ -6,7 +6,7 @@
         margin: 10rpx;
         margin-top: 20rpx;
         width: 96%;
-        color: rgb(50, 50, 50);
+        color: #747474;
         font-size: 36rpx;
 }
 
@@ -14,7 +14,7 @@
         margin: 10rpx;
         margin-top: 100rpx;
         width: 96%;
-        color: rgb(50, 50, 50);
+        color: #747474;
         font-size: 36rpx;
 }
 
@@ -38,28 +38,30 @@
 .page .section input {
         height: 70rpx;
         font-size: 32rpx;
-        color: rgb(124, 124, 124);
+        color: #141414;
 }
 
 .page .top .top-selected input {
         height: 80rpx;
         font-size: 32rpx;
-        color: rgb(124, 124, 124);
+        color: #141414;
 }
 
 .page .section picker {
         height: 70rpx;
+        width: 100%;
         font-size: 32rpx;
-        color: rgb(124, 124, 124);
         margin: auto;
         display: flex;
         align-items: center;
+        color: #141414;
 }
 
 .page .section textarea {
         font-size: 32rpx;
-        color: rgb(124, 124, 124);
         height: 200rpx;
+        width: 100%;
+        color: #141414;
 }
 
 /* 顶部 */

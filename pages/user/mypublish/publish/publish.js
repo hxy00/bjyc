@@ -27,7 +27,11 @@ Page({
 
 
                 startDate: "--请选择出行日期--",
-                multiArray: [['今天', '明天', '3-2', '3-3', '3-4', '3-5'], [0, 1, 2, 3, 4, 5, 6], [0, 10, 20]],
+                multiArray: [
+                        ['今天', '明天', '3-2', '3-3', '3-4', '3-5'],
+                        [0, 1, 2, 3, 4, 5, 6],
+                        [0, 10, 20]
+                ],
                 multiIndex: [0, 0, 0],
         },
         onLoad: function() {
@@ -42,9 +46,9 @@ Page({
         bindShowMsg: function() {
                 this.setData({
                         select: !this.data.select
-                }) 
+                })
         },
-        bindShowMsg2: function () {
+        bindShowMsg2: function() {
                 this.setData({
                         select2: !this.data.select2
                 })
@@ -56,9 +60,9 @@ Page({
                 this.setData({
                         grade_name: name,
                         select: false
-                })      
+                })
         },
-        mySelect2: function (e) {
+        mySelect2: function(e) {
                 console.log(e)
                 var name = e.currentTarget.dataset.name
                 this.setData({
@@ -75,7 +79,7 @@ Page({
         },
 
 
-        pickerTap: function () {
+        pickerTap: function() {
                 date = new Date();
 
                 var monthDay = ['今天', '明天'];
@@ -118,7 +122,7 @@ Page({
 
 
 
-        bindMultiPickerColumnChange: function (e) {
+        bindMultiPickerColumnChange: function(e) {
                 date = new Date();
 
                 var that = this;
@@ -187,7 +191,7 @@ Page({
                 this.setData(data);
         },
 
-        loadData: function (hours, minute) {
+        loadData: function(hours, minute) {
                 var minuteIndex;
                 if (currentMinute > 0 && currentMinute <= 10) {
                         minuteIndex = 10;
@@ -206,7 +210,7 @@ Page({
                 if (minuteIndex == 60) {
                         // 时
                         for (var i = currentHours + 1; i < 24; i++) {
-                                if(i.length == 1){
+                                if (i.length == 1) {
                                         i = "0" + i
                                 }
                                 hours.push(i);
@@ -227,7 +231,7 @@ Page({
                 }
         },
 
-        loadHoursMinute: function (hours, minute) {
+        loadHoursMinute: function(hours, minute) {
                 // 时
                 for (var i = 0; i < 24; i++) {
                         hours.push(i);
@@ -238,7 +242,7 @@ Page({
                 }
         },
 
-        loadMinute: function (hours, minute) {
+        loadMinute: function(hours, minute) {
                 var minuteIndex;
                 if (currentMinute > 0 && currentMinute <= 10) {
                         minuteIndex = 10;
@@ -271,7 +275,7 @@ Page({
                 }
         },
 
-        bindStartMultiPickerChange: function (e) {
+        bindStartMultiPickerChange: function(e) {
                 var that = this;
                 var monthDay = that.data.multiArray[0][e.detail.value[0]];
                 var hours = that.data.multiArray[1][e.detail.value[1]];
@@ -280,19 +284,19 @@ Page({
                 if (monthDay === "今天") {
                         var month = date.getMonth() + 1;
                         var day = date.getDate();
-                        monthDay = month + "月" + day + "日";
+                        monthDay = month + "-" + day;
                 } else if (monthDay === "明天") {
                         var date1 = new Date(date);
                         date1.setDate(date.getDate() + 1);
-                        monthDay = (date1.getMonth() + 1) + "月" + date1.getDate() + "日";
+                        monthDay = (date1.getMonth() + 1) + "-" + date1.getDate();
 
                 } else {
                         var month = monthDay.split("-")[0]; // 返回月
                         var day = monthDay.split("-")[1]; // 返回日
-                        monthDay = month + "月" + day + "日";
+                        monthDay = month + "-" + day;
                 }
 
-                var startDate = monthDay + " " + hours + "点" + minute + '分';
+                var startDate = new Date().getFullYear() + '-' + monthDay + " " + hours + ":" + minute;
                 that.setData({
                         startDate: startDate
                 })
@@ -330,8 +334,8 @@ function requestData(that) {
                         //将获得的各种数据写入itemList，用于setData
                         var itemList = [];
                         for (var i = 0; i < res.data.data.length; i++) {
-                                var origin = res.data.data[i].origin.split('-')[1] + '/' + res.data.data[i].origin.split('-')[2];
-                                var destination = res.data.data[i].destination.split('-')[1] + '/' + res.data.data[i].destination.split('-')[2];
+                                var origin = res.data.data[i].origin.split('/')[1] + '/' + res.data.data[i].origin.split('/')[2];
+                                var destination = res.data.data[i].destination.split('/')[1] + '/' + res.data.data[i].destination.split('/')[2];
                                 itemList.push({
                                         txt: origin + ' —> ' + destination
                                 });
@@ -346,8 +350,13 @@ function requestData(that) {
         });
 }
 
-function validFrm(that, val){
-        let { title, direction, cellPhone, content } = val;
+function validFrm(that, val) {
+        let {
+                title,
+                direction,
+                cellPhone,
+                content
+        } = val;
         if (title.indexOf("--") >= 0) {
                 wx.showToast({
                         title: '请选择出行类别',
@@ -383,7 +392,7 @@ function validFrm(that, val){
                 }
         }
         var startDate = that.data.startDate;
-        if (startDate == ''){
+        if (startDate == '') {
                 wx.showToast({
                         title: '请选择出行时间',
                         icon: 'none',
@@ -398,7 +407,7 @@ function validFrm(that, val){
                                 duration: 3000
                         })
                         return false;
-                }    
+                }
         }
         var counts = 150;
         if (content == '') {
@@ -421,12 +430,17 @@ function validFrm(that, val){
         return true;
 }
 
-function save(that, val){
+function save(that, val) {
         wx.showToast({
                 title: '加载中',
                 icon: 'loading'
         });
-        let { title, direction, cellPhone, content } = val;
+        let {
+                title,
+                direction,
+                cellPhone,
+                content
+        } = val;
         var goTime = that.data.startDate;
         wx.request({
                 url: Constant.TEST_URL + '/publish/save',
@@ -441,7 +455,7 @@ function save(that, val){
                         uId: that.data.userInfo.openId,
                         goTime: goTime
                 },
-                success: function (res) {
+                success: function(res) {
                         if (res == null ||
                                 res.data == null) {
                                 console.error("god bless you...");
@@ -453,14 +467,14 @@ function save(that, val){
                         }
 
                         //解析返回数据
-                        if(res.data.retCode == 0){
+                        if (res.data.retCode == 0) {
                                 var pages = getCurrentPages();
                                 pages[pages.length - 2].onLoad();
 
                                 wx.navigateBack({
                                         delta: 1
                                 })
-                                
+
                                 wx.showToast({
                                         title: '数据保存成功。',
                                         icon: 'none',
@@ -474,5 +488,5 @@ function save(that, val){
                                 })
                         }
                 }
-        }); 
+        });
 }
