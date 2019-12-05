@@ -23,7 +23,10 @@
         <view class="content">
                 <view class="title-cellPhone">
                         <view class="title">【{{publishInfo.title}}】</view>
-                        <view class="cellPhone" data-text="{{publishInfo.cellPhone}}" bindtap="makePhoneCall">{{publishInfo.cellPhone}}</view>
+                        <view class="img"><image style="width:40rpx;height:40rpx;" src="/images/tel.png"></image></view>
+                        <view class="cellPhone" data-text="{{publishInfo.cellPhone}}" bindtap="makePhoneCall">
+                                {{publishInfo.cellPhone}}
+                        </view>
                 </view>
 
                 <view class="direction">

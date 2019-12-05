@@ -47,8 +47,16 @@
         display: inline-block;
 }
 
+.title-cellPhone .img {
+        width: 20%;
+        height: 40rpx;
+        vertical-align: middle;
+        align-items: center;
+        text-align: right;
+}
+
 .title-cellPhone .cellPhone {
-        width: 50%;
+        width: 30%;
         display: inline-block;
         text-align: right;
 }
