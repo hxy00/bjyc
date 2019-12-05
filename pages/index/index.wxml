@@ -8,7 +8,7 @@
                                 <view>
                                         <image class='poster' mode="aspectFill" src="{{item.avatarUrl}}" />
                                         <view wx:if="{{item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
-                                        <view wx:else style='font-size=32rpx; margin: 25rpx; color: gray;'>失效</view>
+                                        <view wx:else style='font-size=32rpx; margin: 25rpx; color: gray;'>过期</view>
                                 </view>
                                 <view class='meta'>
                                         <text class='title'>【{{item.title}}】</text>
