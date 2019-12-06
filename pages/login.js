@@ -19,50 +19,19 @@ Page({
                                 getOpenId(res.code); //获取openId
                         }
                 })
-                // 获取用户信息
-                wx.getSetting({
-                        success: res => {
-                                console.log('getSetting success');
-                                if (res.authSetting['scope.userInfo']) {
-                                        // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                                        that.setData({
-                                                isHide: false
-                                        });
-
-                                        wx.getUserInfo({
-                                                success: res => {
-                                                        // 可以将 res 发送给后台解码出 unionId
-                                                        // this.globalData.userInfo = res.userInfo
-
-                                                        register(that, res.userInfo);
-
-                                                        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                                                        // 所以此处加入 callback 以防止这种情况
-                                                        if (that.userInfoReadyCallback) {
-                                                                that.userInfoReadyCallback(res)
-                                                        }
-
-                                                        //授权成功后
-                                                        wx.switchTab({
-                                                                url: '/pages/index/index',
-                                                        });
-                                                }
-                                        })
-                                } else {
-                                        // 用户没有授权
-                                        // 改变 isHide 的值，显示授权页面
-                                        that.setData({
-                                                isHide: true
-                                        });
-                                }
-                        }
-                })
+               
+               //获取用户授权信息
+                getSetting(this);
         },
 
         bindGetUserInfo: function (e) {
                 if (e.detail.userInfo) {
                         //用户按了允许授权按钮
                         var that = this;
+
+                        //获取用户授权信息
+                        getSetting(that);
+                        
                         // 获取到用户的信息了，打印到控制台上看下
                         //授权成功后
                         wx.switchTab({
@@ -110,9 +79,60 @@ function getOpenId(code) {
                                         console.log('openId = ' + openId);
                                         wx.setStorageSync("openId", openId);
                                 }
+                        },
+                        fail: function(res){
+                                console.log(res);
+                        },
+                        complete: function (res) {
+                                console.log(res);
+
                         }
                 })
         }
+}
+
+/**
+ * 获取用户授权信息
+ */
+function getSetting(that) {
+        // 获取用户信息
+        wx.getSetting({
+                success: res => {
+                        console.log('getSetting success');
+                        if (res.authSetting['scope.userInfo']) {
+                                // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+                                that.setData({
+                                        isHide: false
+                                });
+
+                                wx.getUserInfo({
+                                        success: res => {
+                                                // 可以将 res 发送给后台解码出 unionId
+                                                // this.globalData.userInfo = res.userInfo
+
+                                                register(that, res.userInfo);
+
+                                                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                                                // 所以此处加入 callback 以防止这种情况
+                                                if (that.userInfoReadyCallback) {
+                                                        that.userInfoReadyCallback(res)
+                                                }
+
+                                                //授权成功后
+                                                wx.switchTab({
+                                                        url: '/pages/index/index',
+                                                });
+                                        }
+                                })
+                        } else {
+                                // 用户没有授权
+                                // 改变 isHide 的值，显示授权页面
+                                that.setData({
+                                        isHide: true
+                                });
+                        }
+                }
+        })
 }
 
 /**
@@ -151,6 +171,12 @@ function register(that, userInfo) {
                                         })
                                         app.globalData.userInfo = userInfo;
                                 }
+                        },
+                        fail: function (res) {
+                                console.log(res);
+                        },
+                        complete: function (res) {
+                                console.log(res);
                         }
                 })
         }

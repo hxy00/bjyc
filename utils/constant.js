@@ -1,5 +1,5 @@
 //url相关
-var TEST_URL = "http://127.0.0.1:8080";
+var TEST_URL = "http://192.168.5.193:8080";
 // var BASE_URL = "https://gank.io/api";
 // var GET_MEIZHI_URL = BASE_URL.concat("/data/%E7%A6%8F%E5%88%A9/10/");
 

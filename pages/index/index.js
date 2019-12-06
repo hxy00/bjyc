@@ -84,7 +84,7 @@ function requestData(that, targetPage) {
                 icon: 'loading'
         });
         wx.request({
-                url: Constant.TEST_URL + '/publish/getPage/',
+                url: Constant.TEST_URL + '/publish/getPage',
                 header: {
                         "Content-Type": "application/json"
                 },
