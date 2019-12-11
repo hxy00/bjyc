@@ -159,6 +159,10 @@ Page({
         onPullDownRefresh: function () {
                 var that = this;
                 that.onLoad(); //重新加载onLoad()
+                setTimeout(function () {
+                        //这里面是你要休眠后所执行的js代码
+                        wx.stopPullDownRefresh();
+                }, 3000);
         }
 })
 

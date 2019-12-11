@@ -36,7 +36,7 @@ Page({
         about: function(){
                 wx.showModal({
                         title: '关于本系统',
-                        content: 'V2.1.0',
+                        content: 'V2.5.3',
                         showCancel: false,
                 })
         },
