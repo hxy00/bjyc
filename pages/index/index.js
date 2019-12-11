@@ -121,6 +121,7 @@ function requestData(that, targetPage) {
                                         goTime: fGoTime,
                                         cellPhone: res.data.data.list[i].cellPhone,
                                         title: res.data.data.list[i].title,
+                                        isTimeOut: res.data.data.list[i].isTimeOut,
                                         isValid: res.data.data.list[i].isValid,
                                         direction: res.data.data.list[i].direction,
                                         content: res.data.data.list[i].content,

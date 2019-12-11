@@ -23,7 +23,9 @@
         <view class="content">
                 <view class="title-cellPhone">
                         <view class="title">【{{publishInfo.title}}】</view>
-                        <view class="img"><image style="width:40rpx;height:40rpx;" src="/images/tel.png"></image></view>
+                        <view class="img">
+                                <image style="width:40rpx;height:40rpx;" src="/images/tel.png"></image>
+                        </view>
                         <view class="cellPhone" data-text="{{publishInfo.cellPhone}}" bindtap="makePhoneCall">
                                 {{publishInfo.cellPhone}}
                         </view>
@@ -48,8 +50,8 @@
                 </view>
                 <view class="isValid">
                         <view class="txt">是否有效：</view>
-                        <view wx:if="{{publishInfo.isValid == 1}}" style='font-size=32rpx; color: #d81e06;'>有效</view>
-                        <view wx:else style='font-size=32rpx; color: gray;'>过期</view>
+                        <view wx:if="{{publishInfo.isTimeOut == 1 && publishInfo.isValid == 1}}" style='font-size=32rpx; color: #d81e06;'>有效</view>
+                        <view wx:else style='font-size=32rpx; color: gray;'>失效</view>
                 </view>
         </view>
 </view>

@@ -7,8 +7,8 @@
                         <view class='item' data-text="{{item}}" bindtap="onItemClick">
                                 <view>
                                         <image class='poster' mode="aspectFill" src="{{item.avatarUrl}}" />
-                                        <view wx:if="{{item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
-                                        <view wx:else style='font-size=32rpx; margin: 25rpx; color: gray;'>过期</view>
+                                        <view wx:if="{{item.isTimeOut == 1 && item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
+                                        <view wx:else style='font-size=32rpx; margin: 25rpx; color: gray;'>失效</view>
                                 </view>
                                 <view class='meta'>
                                         <text class='title'>【{{item.title}}】</text>
@@ -25,7 +25,8 @@
                                                 Tel: {{item.cellPhone}}
                                         </button>
                                         <view class='time2'>
-                                                创建时间：<text>{{item.createdAt}}</text>
+                                                创建时间：
+                                                <text>{{item.createdAt}}</text>
                                         </view>
                                 </view>
                         </view>

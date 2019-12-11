@@ -4,11 +4,13 @@
                 <view class='item' data-text="{{item}}" bindtap="onItemClick" bindlongtap="onItemLongClick">
                         <view>
                                 <image class='poster' mode="aspectFill" src="{{userInfo.avatarUrl}}" />
-                                <view wx:if="{{item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
-                                <view wx:else style='font-size=32rpx; margin: 25rpx; color: gray;'>过期</view>
+                                <view wx:if="{{item.isTimeOut == 1 && item.isValid == 1}}" style='font-size=32rpx; margin: 25rpx; color: #d81e06;'>有效</view>
+                                <view wx:else style='font-size=32rpx; margin: 25rpx; color: gray;'>失效</view>
                         </view>
                         <view class='meta'>
-                                <text class='title'>【{{item.title}}】</text>
+                                <text class='title'>
+                                        <text>【{{item.title}}】</text>
+                                </text>
                                 <text class='title'>{{item.direction}}</text>
                                 <view class='artists'>
                                         {{item.content}}
@@ -18,11 +20,12 @@
                                         <text wx:if="{{item.goTime}}">{{item.goTime}}</text>
                                         <text wx:else>{{item.publishedAt}}</text>
                                 </view>
-                                <!-- <button class='btn_tel' data-text="{{item.cellPhone}}">
-                                        Tel:{{item.cellPhone}}
-                                </button> -->
+                                <button catchtap="btnValid" wx:if="{{item.isTimeOut == 1 && item.isValid == 1}}" class='btn-valid' data-text="{{item}}">
+                                        手动置为无效
+                                </button>
                                 <view class='time2'>
-                                        创建时间：<text>{{item.createdAt}}</text>
+                                        创建时间：
+                                        <text>{{item.createdAt}}</text>
                                 </view>
                         </view>
                 </view>

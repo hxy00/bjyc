@@ -66,16 +66,14 @@
 }
 
 
-.btn_tel {
+.btn-valid {
   width: 100%;
   background-color: #F5F5F5;
-  color: white;
   border-radius: 8rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  align: center;
   color: #696969;
 }
 

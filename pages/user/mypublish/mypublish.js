@@ -75,7 +75,7 @@ Page({
                                                                         })
                                                                 } else {
                                                                         wx.showToast({
-                                                                                title: '删除失败，请稍后重试',
+                                                                                title: res.data.retMsg,
                                                                                 icon: 'none',
                                                                                 duration: 3000
                                                                         })  
@@ -96,7 +96,7 @@ Page({
         //         requestData(that, mCurrentPage + 1);
         // },
 
-        onReachBottom: function () {
+        onReachBottom: function (event) {
                 var that = this
                 that.setData({
                         hidden: false,
@@ -104,10 +104,56 @@ Page({
                 requestData(that, mCurrentPage + 1);
         },
 
-        publish: function (e) {
+        publish: function (event) {
                 wx.navigateTo({
                         url: '/pages/user/mypublish/publish/publish',
                 })
+        },
+
+        btnValid: function (event){
+                var that = this;
+                if (event.currentTarget.dataset.text != null) {
+                        var id = event.currentTarget.dataset.text.id;
+                        var uId = that.data.userInfo.openId;
+                        wx.showModal({
+                                title: '置为无效',
+                                content: '确定要置为无效吗？',
+                                success(res) {
+                                        console.log(res)
+                                        if (res.confirm) {
+                                                wx.request({
+                                                        url: Constant.TEST_URL + '/publish/setValid',
+                                                        header: {
+                                                                "Content-Type": "application/json"
+                                                        },
+                                                        data: {
+                                                                id: id,
+                                                                uId: that.data.userInfo.openId
+                                                        },
+                                                        success: function (res) {
+                                                                if (res.data.retCode == 0) {
+                                                                        that.onLoad();
+                                                                        wx.showToast({
+                                                                                title: '置为无效成功',
+                                                                                icon: 'success',
+                                                                                duration: 3000
+                                                                        })
+                                                                } else {
+                                                                        wx.showToast({
+                                                                                title: res.data.retMsg,
+                                                                                icon: 'none',
+                                                                                duration: 3000
+                                                                        })
+                                                                }
+                                                        }
+                                                })
+
+                                        } else {
+                                                console.log('用户点击取消')
+                                        }
+                                }
+                        })
+                }
         },
 
         onPullDownRefresh: function () {
@@ -129,7 +175,7 @@ function requestData(that, targetPage) {
                 icon: 'loading'
         });
         wx.request({
-                url: Constant.TEST_URL + '/publish/getPage/',
+                url: Constant.TEST_URL + '/publish/getPage',
                 header: {
                         "Content-Type": "application/json"
                 },
@@ -168,6 +214,7 @@ function requestData(that, targetPage) {
                                         goTime: fGoTime,
                                         cellPhone: res.data.data.list[i].cellPhone,
                                         title: res.data.data.list[i].title,
+                                        isTimeOut: res.data.data.list[i].isTimeOut,
                                         isValid: res.data.data.list[i].isValid,
                                         direction: res.data.data.list[i].direction,
                                         content: res.data.data.list[i].content,

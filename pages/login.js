@@ -16,12 +16,9 @@ Page({
                         success: res => {
                                 console.log('login success');
                                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                                getOpenId(res.code); //获取openId
+                                getOpenId(this, res.code); //获取openId
                         }
                 })
-               
-               //获取用户授权信息
-                getSetting(this);
         },
 
         bindGetUserInfo: function (e) {
@@ -59,7 +56,7 @@ Page({
 /**
  * 获取openId
  */
-function getOpenId(code) {
+function getOpenId(that , code) {
         console.log('根据code获取openId，code = ' + code);
         if (code) {
                 //发送code到后台，分析openid
@@ -78,6 +75,9 @@ function getOpenId(code) {
                                         var openId = res.data.data.openid;
                                         console.log('openId = ' + openId);
                                         wx.setStorageSync("openId", openId);
+
+                                        //获取用户授权信息
+                                        getSetting(that);
                                 }
                         },
                         fail: function(res){
